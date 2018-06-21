@@ -1,0 +1,93 @@
+{
+    "total":80,    
+    "indexList": [
+      {
+        "num": 1,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"存续",
+        "type": "green",
+        "representative":"殷正富",
+        "registerCapital":109000,
+        "registerTime":"2007-04-10",
+        "classify":"工程机械"
+      },
+      {
+        "num": 2,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中国联合水泥有限公司",
+        "tips":"在业",
+        "type": "green",
+        "representative":"孟祥文",
+        "registerCapital":2000,
+        "registerTime":"2007-04-10",
+        "classify":"环境"
+      },
+      {
+        "num": 3,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"吊销",
+        "type": "orange",
+        "representative":"孟祥文",
+        "registerCapital":56789,
+        "registerTime":"2007-04-10",
+        "classify":"海外"
+      },
+      {
+        "num": 4,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"注销",
+        "type": "red",
+        "representative":"殷正富",
+        "registerCapital":42552,
+        "registerTime":"2007-04-10",
+        "classify":"金融"
+      },
+      {
+        "num": 5,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"迁出",
+        "type": "orange",
+        "representative":"殷正富",
+        "registerCapital":109000,
+        "registerTime":"2007-04-10",
+        "classify":"农机"
+      },
+      {
+        "num": 6,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"存续",
+        "type": "green",
+        "representative":"孟祥文",
+        "registerCapital":43000,
+        "registerTime":"2007-04-10",
+        "classify":"环境"
+      },
+      {
+        "num": 7,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"吊销",
+        "type": "orange",
+        "representative":"殷正富",
+        "registerCapital":76645,
+        "registerTime":"2007-04-10",
+        "classify":"其他"
+      },
+      {
+        "num": 8,
+        "imgSrc":"../static/imgs/logo.png",
+        "companyName": "中联重机公司",
+        "tips":"在业",
+        "type": "green",
+        "representative":"孟祥文",
+        "registerCapital":45733,
+        "registerTime":"2007-04-10",
+        "classify":"工程机械"
+      }
+    ]
+  }
