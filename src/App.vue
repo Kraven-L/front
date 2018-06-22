@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <common-header></common-header>
+    <div class="main">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-export default {
-  
-}
+export default {};
 </script>
 
 <style>
-@import './assets/css/reset.less';
+@import "../static/css/reset.less";
 
-body{
+body {
   background: #f5f5f5;
+  font-family: "Microsoft YaHei";
 }
-#app{
+.main {
   width: 1200px;
   margin: 0 auto;
 }

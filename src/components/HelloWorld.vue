@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="main">
     <div class="filter">
 
     </div>
@@ -10,7 +10,7 @@
           <li v-for="(item,index) in dataList" :key="index">
             <router-link to="">
               <div class="logo">
-              <img :src=item.imgSrc alt="">
+              <img :src=item.imgSrc>
             </div>
             <div class="content">
               <h3>{{item.companyName}}
@@ -81,12 +81,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
+.main{
+
+}
 .filter {
   width: 948px;
   height: 158px;
   background: #fff;
   border: 1px solid #e1e1e1;
-  margin-top: 100px;
+  // margin-top: 100px;
 }
 .list-box {
   width: 950px;

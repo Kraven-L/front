@@ -14,6 +14,16 @@ Vue.use(ElementUI);
 import axios from 'axios'
 Vue.prototype.$axios=axios
 
+//全局注册header组件
+import CommonHeader from './components/common/CommonHeader'
+Vue.component('CommonHeader',CommonHeader)
+
+//全局注册分页组件
+import Pagination from './components/common/Pagination'
+Vue.component('Pagination',Pagination)
+
+// import "../static/css/reset.less";
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
