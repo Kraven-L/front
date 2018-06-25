@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Home from '@/components/Home'
 import BasicInfo from '@/components/BasicInfo'
 import BasicInfoTable from '@/components/BasicInfoTable'
 import CompanyDetails from '@/components/CompanyDetails'
+import ContactInfo from '@/components/ContactInfo'
 
 Vue.use(Router)
 
@@ -11,8 +12,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'Home',
+      component: Home
     },
     {
       path: '/basicinfo',
@@ -28,6 +29,11 @@ export default new Router({
       path: '/companydetails',
       name: 'CompanyDetails',
       component: CompanyDetails
+    },
+    {
+      path: '/contactinfo',
+      name: 'ContactInfo',
+      component: ContactInfo
     }
   ]
 })

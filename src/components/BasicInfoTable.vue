@@ -392,7 +392,8 @@
               <tr>
                 <td>
                   <p>
-                    <a href="">詹纯新</a>
+                    <!-- <a href="">詹纯新</a> -->
+                    <router-link to="/contactinfo">詹纯新</router-link>
                   </p>
                 </td>
                 <td>
@@ -417,7 +418,8 @@
               <tr>
                 <td>
                   <p>
-                    <a href="">詹纯新</a>
+                    <!-- <a href="">詹纯新</a> -->
+                    <router-link to="/contactinfo">詹纯新</router-link>
                   </p>
                 </td>
                 <td>

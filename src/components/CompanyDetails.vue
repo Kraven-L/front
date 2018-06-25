@@ -477,9 +477,6 @@ export default {
           background-color: #409eff;
         }
       }
-      // a {
-      //   color: #51aff8;
-      // }
     }
   }
 }
