@@ -5,6 +5,7 @@ import BasicInfo from '@/components/BasicInfo'
 import BasicInfoTable from '@/components/BasicInfoTable'
 import CompanyDetails from '@/components/CompanyDetails'
 import ContactInfo from '@/components/ContactInfo'
+import MeetingDetails from '@/components/MeetingDetails'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/contactinfo',
       name: 'ContactInfo',
       component: ContactInfo
+    },
+    {
+      path: '/meetingdetails',
+      name: 'MeetingDetails',
+      component: MeetingDetails
     }
   ]
 })

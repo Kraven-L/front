@@ -17,7 +17,7 @@
               <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
-            <el-date-picker v-model="value2" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2">
+            <el-date-picker v-model="value2" @change="chooseDate" type="daterange" align="right" unlink-panels range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" :picker-options="pickerOptions2" value-format="yyyy-MM-dd">
             </el-date-picker>
             <el-select v-model="value3" placeholder="全部分类">
               <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value">
@@ -34,7 +34,7 @@
           <table>
             <tr>
               <td>
-                <a>第五届董事会第三次会议</a>
+                <router-link to="/meetingdetails">第五届董事会第三次会议</router-link>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
@@ -132,8 +132,8 @@
           <span class="line"></span>
           <h4>风险控制</h4>
           <div class="select">
-            <el-select v-model="value4" placeholder="全部分类">
-              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.value">
+            <el-select v-model="value4" placeholder="全部分类" @change="dataChoose">
+              <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.label">
               </el-option>
             </el-select>
             <el-input v-model="input2" placeholder="请输入会议名称关键字" width=200px clearable></el-input>
@@ -145,41 +145,46 @@
         </div>
         <div class="tableList">
           <table>
-            <tr>
+            <tr v-show="lawsuitShow">
               <td>
-                <a>诉讼资料： 关于中联重机公司与张三的欠款诉讼.pdf</a>
+                <span>诉讼资料：</span>
+                <a><img :src=pdf>关于中联重机公司与张三的欠款诉讼.pdf</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
               </td>
             </tr>
-            <tr>
+            <tr v-show="guaranteeShow">
               <td>
-                <a>担保资料： 中联重科购买担保资料.jpg</a>
+                <span>担保资料：</span>
+                <a><img :src=img>中联重科购买担保资料.jpg</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
               </td>
             </tr>
-            <tr>
+            <tr v-show="guaranteeShow">
               <td>
-                <a>担保资料： 中联重科购买担保资料.doc</a>
+                <span>担保资料：</span>
+                <a><img :src=word>中联重科购买担保资料.doc</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
               </td>
             </tr>
-            <tr>
+            <tr v-show="lawsuitShow">
               <td>
-                <a>诉讼资料： 关于中联重机公司与张三的欠款诉讼.xls</a>
+                <span>诉讼资料：</span>
+                <a><img :src=excel>关于中联重机公司与张三的欠款诉讼.xls</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
               </td>
             </tr>
-            <tr>
+            <tr v-show="othersShow">
               <td>
-                <a>其它： 中联重科风险控制方案.ppt</a>
+                <span>其它：</span>
+                <a><img :src=ppt>中联重科风险控制方案.ppt</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
@@ -215,7 +220,7 @@
           <table>
             <tr>
               <td>
-                <a>关于中联重机公司与张三的欠款诉讼.pdf</a>
+                <a><img :src=pdf>关于中联重机公司与张三的欠款诉讼.pdf</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
@@ -223,7 +228,7 @@
             </tr>
             <tr>
               <td>
-                <a>中联重科购买担保资料.txt</a>
+                <a><img :src=word>中联重科购买担保资料.txt</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
@@ -231,7 +236,7 @@
             </tr>
             <tr>
               <td>
-                <a>中联重科购买担保资料.doc</a>
+                <a><img :src=word>中联重科购买担保资料.doc</a>
               </td>
               <td style="width:100px;text-align:right;">
                 <p>2018-05-15</p>
@@ -366,9 +371,14 @@ export default {
       input2: "",
       input3: "",
       currentPage1: 1,
-      currentPage2: 2,
-      currentPage3: 3,
-      currentPage4: 4
+      pdf: "./static/imgs/pdf.png",
+      excel: "./static/imgs/excel.png",
+      img: "./static/imgs/img.png",
+      word: "./static/imgs/word.png",
+      ppt: "./static/imgs/ppt.png",
+      lawsuitShow: true,
+      guaranteeShow: true,
+      othersShow: true
     };
   },
   mounted() {},
@@ -386,6 +396,30 @@ export default {
         this.dataList = res.data.indexList;
         this.total = res.data.total;
       });
+    },
+    chooseDate() {
+      console.log(this.value2);
+      console.log(Object.prototype.toString.apply(this.value2));
+      console.log(this.value2.join(","));
+    },
+    dataChoose() {
+      if (this.value4 == "诉讼资料") {
+        this.lawsuitShow = true;
+        this.guaranteeShow = false;
+        this.othersShow = false;
+      } else if (this.value4 == "担保资料") {
+        this.lawsuitShow = false;
+        this.guaranteeShow = true;
+        this.othersShow = false;
+      } else if (this.value4 == "其他") {
+        this.lawsuitShow = false;
+        this.guaranteeShow = false;
+        this.othersShow = true;
+      }else{
+        this.lawsuitShow = true;
+        this.guaranteeShow = true;
+        this.othersShow = true;
+      }
     }
   }
 };
@@ -457,6 +491,10 @@ export default {
                 &:hover {
                   color: #51aff8;
                 }
+                img {
+                  vertical-align: middle;
+                  margin-right: 8px;
+                }
               }
               p {
                 color: #999;
@@ -468,14 +506,6 @@ export default {
       .el-pagination {
         margin: 15px 0;
         text-align: right;
-        &.is-background .btn-next,
-        &.is-background .btn-prev,
-        &.is-background .el-pager li {
-          background-color: #fff;
-        }
-        &.is-background .el-pager li:not(.disabled).active {
-          background-color: #409eff;
-        }
       }
     }
   }

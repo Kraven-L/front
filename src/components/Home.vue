@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div class="main clearfix">
     <div class="filter">
       <div class="filterList clearfix">
         <p>板块</p>
@@ -9,10 +9,10 @@
         </p>
         <ul class="clearfix">
           <li>
-              <el-select v-model="value" placeholder="请选择">
-                <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-                </el-option>
-              </el-select>
+            <el-select v-model="value" placeholder="请选择">
+              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+              </el-option>
+            </el-select>
           </li>
           <li>配套件</li>
           <li>海外</li>
@@ -22,7 +22,7 @@
           <li>其他</li>
         </ul>
       </div>
-      <div class="filterList clearfix">
+      <div class="filterList clearfix" v-show="filterShow">
         <p>公司类型</p>
         <p style="color:#333">|</p>
         <p>
@@ -36,7 +36,7 @@
           <li>母公司兼分公司</li>
         </ul>
       </div>
-      <div class="filterList clearfix">
+      <div class="filterList clearfix" v-show="filterShow">
         <p>经营状态</p>
         <p style="color:#333">|</p>
         <p>
@@ -50,6 +50,41 @@
           <li>迁出</li>
         </ul>
       </div>
+      <div class="pull" @click=toggleFilter>
+      </div>
+    </div>
+    <div class="recently">
+      <h3>最近浏览</h3>
+      <ul>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+        <li>
+          <h4>中联重科股份有限公司</h4>
+          <p>21小时前</p>
+        </li>
+      </ul>
     </div>
     <div class="list-box">
       <p>共计
@@ -57,7 +92,7 @@
       <div class="list">
         <ul class="clearfix">
           <li v-for="(item,index) in dataList" :key="index">
-            <router-link to="">
+            <router-link to="/companydetails" class="clearfix">
               <div class="logo">
                 <img :src=item.imgSrc>
               </div>
@@ -88,9 +123,10 @@
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3" :page-size="100" layout="prev, pager, next, jumper" :total="1000">
         </el-pagination>
       </div> -->
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3" :page-size="10" background layout="prev, pager, next, jumper" :total="100">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="10" background layout="prev, pager, next, jumper" :total="100">
       </el-pagination>
     </div>
+
   </div>
 </template>
 
@@ -98,10 +134,8 @@
 export default {
   data() {
     return {
-      currentPage1: 5,
-      currentPage2: 5,
-      currentPage3: 5,
-      currentPage4: 4,
+      filterShow: true,
+      currentPage1: 1,
       total: "",
       dataList: [],
       options: [
@@ -136,13 +170,9 @@ export default {
         {
           value: "选项8",
           label: "土方"
-        },
-        {
-          value: "选项9",
-          label: "建起"
         }
       ],
-      value:"工程机械"
+      value: "工程机械"
     };
   },
   mounted() {
@@ -154,6 +184,7 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+      console.log('发送第'+val+'页的请求')
     },
     getListData() {
       let url = "../../static/lists.json";
@@ -162,6 +193,9 @@ export default {
         this.dataList = res.data.indexList;
         this.total = res.data.total;
       });
+    },
+    toggleFilter() {
+      this.filterShow = !this.filterShow;
     }
   }
 };
@@ -169,18 +203,30 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" scoped>
+@borderColor: #e1e1e1;
+
 .main {
 }
 .filter {
+  float: left;
   width: 948px;
-  height: 158px;
+  // height: 158px;
   background: #fff;
   border: 1px solid #e1e1e1;
   padding: 19px 13px;
   box-sizing: border-box;
+  position: relative;
   // margin-top: 100px;
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 2s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
   .filterList {
     line-height: 41px;
+    transition: all 0.5s;
     p {
       color: #999;
       float: left;
@@ -212,19 +258,63 @@ export default {
         //   height: 16px;
         //   background: url(../../static/imgs/pulldown.png) no-repeat;
         // }
-        .el-select{
+        .el-select {
           width: 110px;
-          .el-input{
-            .el-input__inner{
-              border:none;
+          .el-input {
+            .el-input__inner {
+              border: none;
             }
           }
         }
       }
     }
   }
+  .pull {
+    width: 60px;
+    height: 15px;
+    position: absolute;
+    border: 1px solid @borderColor;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%, 100%);
+    border-top: none;
+    border-radius: 0 0 3px 3px;
+    background: #fff url(../../static/imgs/scroll-up.png) no-repeat center center;
+    cursor: pointer;
+  }
+}
+.recently {
+  float: right;
+  width: 240px;
+  h3 {
+    font-size: 18px;
+    color: #fff;
+    background: #77ca08;
+    line-height: 54px;
+    padding: 6px 0 0 20px;
+  }
+  ul {
+    border: 1px solid @borderColor;
+    border-top: none;
+    padding: 6px 10px;
+    background: #fff;
+    li {
+      border-bottom: 1px dotted @borderColor;
+      padding: 9px 10px;
+      h4 {
+        line-height: 25px;
+        color: #333;
+      }
+      p {
+        line-height: 22px;
+        color: #999;
+        font-size: 14px;
+      }
+    }
+  }
 }
 .list-box {
+  float: left;
   width: 950px;
   // height: 840px;
   > p {
@@ -334,9 +424,6 @@ export default {
   }
   .el-pagination {
     margin: 30px 0;
-    .btn-next {
-      background-color: #fff !important;
-    }
   }
 }
 </style>

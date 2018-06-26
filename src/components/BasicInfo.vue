@@ -409,14 +409,6 @@ export default {
       .el-pagination {
         margin: 15px 0;
         text-align: right;
-        &.is-background .btn-next,
-        &.is-background .btn-prev,
-        &.is-background .el-pager li {
-          background-color: #fff;
-        }
-        &.is-background .el-pager li:not(.disabled).active {
-          background-color: #409eff;
-        }
       }
       .el-table--border,
       .el-table th.is-leaf,
