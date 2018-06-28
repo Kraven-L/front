@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import BasicInfoElementTable from '@/components/BasicInfoElementTable'
 import BasicInfo from '@/components/BasicInfo'
-import BasicInfoTable from '@/components/BasicInfoTable'
 import CompanyDetails from '@/components/CompanyDetails'
 import ContactInfo from '@/components/ContactInfo'
 import MeetingDetails from '@/components/MeetingDetails'
@@ -22,9 +22,9 @@ export default new Router({
       component: BasicInfo
     },
     {
-      path: '/basicinfotable',
-      name: 'BasicInfoTable',
-      component: BasicInfoTable
+      path: '/basicinfoelementtable',
+      name: 'BasicInfoElementTable',
+      component: BasicInfoElementTable
     },
     {
       path: '/companydetails',

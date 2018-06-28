@@ -24,7 +24,7 @@
               </el-option>
             </el-select>
             <el-input v-model="input1" placeholder="请输入会议名称关键字" width=200px clearable></el-input>
-            <el-button type="primary">查 询</el-button>
+            <el-button type="primary" @click="searchKeyword()">查 询</el-button>
             <!-- <el-input placeholder="请输入会议名称关键字" v-model="input2" class="input-with-select">
               <el-button slot="append" icon="el-icon-search"></el-button>
             </el-input> -->
@@ -32,115 +32,30 @@
         </div>
         <div class="tableList">
           <table>
-            <tr>
+            <tr v-for="(item,index) in meetings" :key="index" class="meeting-list">
               <td>
-                <router-link to="/meetingdetails">第五届董事会第三次会议</router-link>
+                <router-link to="/meetingdetails">{{item.meetingName}}</router-link>
               </td>
               <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <a>第五届董事会第三次会议</a>
-              </td>
-              <td style="width:100px;text-align:right;">
-                <p>2018-05-15</p>
+                <p>{{item.meetingDate}}</p>
               </td>
             </tr>
           </table>
         </div>
-        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="10" layout="prev, pager, next, total" :total="100">
+        <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="10" layout="prev, pager, next, total" :total=total>
         </el-pagination>
-        <!-- <div class="tablelist-1">
-          <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="date" width="180">
-            </el-table-column>
-            <el-table-column prop="name" width="180">
-            </el-table-column>
-            <el-table-column prop="address">
-            </el-table-column>
-          </el-table>
-        </div> -->
       </div>
       <div class="main1">
         <div class="title">
           <span class="line"></span>
           <h4>风险控制</h4>
           <div class="select">
-            <el-select v-model="value4" placeholder="全部分类" @change="dataChoose">
+            <el-select v-model="value4" placeholder="全部分类" @change="riskDataChoose">
               <el-option v-for="item in options3" :key="item.value" :label="item.label" :value="item.label">
               </el-option>
             </el-select>
             <el-input v-model="input2" placeholder="请输入会议名称关键字" width=200px clearable></el-input>
             <el-button type="primary">查 询</el-button>
-            <!-- <el-input placeholder="请输入会议名称关键字" v-model="input2" class="input-with-select">
-              <el-button slot="append" icon="el-icon-search"></el-button>
-            </el-input> -->
           </div>
         </div>
         <div class="tableList">
@@ -193,16 +108,6 @@
 
           </table>
         </div>
-        <!-- <div class="tablelist-1">
-          <el-table :data="tableData" style="width: 100%">
-            <el-table-column prop="date" width="180">
-            </el-table-column>
-            <el-table-column prop="name" width="180">
-            </el-table-column>
-            <el-table-column prop="address">
-            </el-table-column>
-          </el-table>
-        </div> -->
       </div>
       <div class="main1">
         <div class="title">
@@ -263,29 +168,6 @@
 export default {
   data() {
     return {
-      msg: "aaaaaaa",
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
-        }
-      ],
       options1: [
         {
           value: "选项1",
@@ -371,6 +253,8 @@ export default {
       input2: "",
       input3: "",
       currentPage1: 1,
+      total: 1,
+      meetings: [],
       pdf: "./static/imgs/pdf.png",
       excel: "./static/imgs/excel.png",
       img: "./static/imgs/img.png",
@@ -378,31 +262,25 @@ export default {
       ppt: "./static/imgs/ppt.png",
       lawsuitShow: true,
       guaranteeShow: true,
-      othersShow: true
+      othersShow: true,
+      keywordsShow: true
     };
   },
-  mounted() {},
+  mounted() {
+    this.getMeetingList(this.currentPage1);
+  },
   methods: {
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-    getListData() {
-      let url = "../../static/lists.json";
-      this.$axios.get(url).then(res => {
-        // console.log(res.data.indexList);
-        this.dataList = res.data.indexList;
-        this.total = res.data.total;
-      });
+      // console.log(`当前页: ${val}`);
+      // console.log(this.currentPage1);
+      this.getMeetingList(this.currentPage1);
     },
     chooseDate() {
       console.log(this.value2);
       console.log(Object.prototype.toString.apply(this.value2));
       console.log(this.value2.join(","));
     },
-    dataChoose() {
+    riskDataChoose() {
       if (this.value4 == "诉讼资料") {
         this.lawsuitShow = true;
         this.guaranteeShow = false;
@@ -415,11 +293,35 @@ export default {
         this.lawsuitShow = false;
         this.guaranteeShow = false;
         this.othersShow = true;
-      }else{
+      } else {
         this.lawsuitShow = true;
         this.guaranteeShow = true;
         this.othersShow = true;
       }
+    },
+
+    //获取会议列表
+    getMeetingList(pageID) {
+      var pageID = pageID || 1;
+      let url = "../../static/data/meetingList-page" + pageID + ".json";
+      this.$axios.get(url).then(res => {
+        this.total = res.data.total;
+        this.meetings = res.data.meetingList.meeting;
+      });
+    },
+    searchKeyword() {
+      if (this.input1 == "") {
+        this.getMeetingList(this.currentPage1);
+
+        return;
+      }
+      let newList = [];
+      for (let i = 0; i < this.meetings.length; i++) {
+        if (this.meetings[i].meetingName.search(this.input1) != -1) {
+          newList.push(this.meetings[i]);
+        }
+      }
+      this.meetings = newList;
     }
   }
 };

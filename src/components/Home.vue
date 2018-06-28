@@ -4,50 +4,93 @@
       <div class="filterList clearfix">
         <p>板块</p>
         <p style="color:#333">|</p>
-        <p>
-          <span class="all">全部</span>
-        </p>
-        <ul class="clearfix">
+        <ul>
           <li>
-            <el-select v-model="value" placeholder="请选择">
+            <span>全部</span>
+          </li>
+          <li>
+            <!-- <span @click="changeDropdown">工程机械</span>
+            <ul v-show="dropdownShow">
+              <li>全部</li>
+              <li>混泥土</li>
+              <li>混泥土改制</li>
+              <li>桩工</li>
+              <li>建起</li>
+              <li>工起</li>
+              <li>非开挖</li>
+              <li>土方</li>
+            </ul> -->
+            <el-select v-model="value" placeholder="全部分类">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
             </el-select>
           </li>
-          <li>配套件</li>
-          <li>海外</li>
-          <li>金融</li>
-          <li>农机</li>
-          <li>环境</li>
-          <li>其他</li>
+          <li>
+            <span class="active">配套件</span>
+          </li>
+          <li>
+            <span>海外</span>
+          </li>
+          <li>
+            <span>金融</span>
+          </li>
+          <li>
+            <span>农机</span>
+          </li>
+          <li>
+            <span>环境</span>
+          </li>
+          <li>
+            <span>其他</span>
+          </li>
         </ul>
       </div>
       <div class="filterList clearfix" v-show="filterShow">
         <p>公司类型</p>
         <p style="color:#333">|</p>
-        <p>
-          <span class="all">全部</span>
-        </p>
         <ul>
-          <li>母公司</li>
-          <li>一级分公司</li>
-          <li>一级子公司</li>
-          <li>二级子公司</li>
-          <li>母公司兼分公司</li>
+          <li>
+            <span>全部</span>
+          </li>
+          <li>
+            <span>母公司</span>
+          </li>
+          <li>
+            <span class="active">一级分公司</span>
+          </li>
+          <li>
+            <span>一级子公司</span>
+          </li>
+          <li>
+            <span>二级子公司</span>
+          </li>
+          <li>
+            <span>母公司兼分公司</span>
+          </li>
         </ul>
       </div>
       <div class="filterList clearfix" v-show="filterShow">
         <p>经营状态</p>
         <p style="color:#333">|</p>
-        <p>
-          <span class="all">全部</span>
-        </p>
         <ul>
-          <li>在业</li>
-          <li>存续</li>
-          <li>吊销</li>
-          <li>注销</li>
-          <li>迁出</li>
+          <li>
+            <span>全部</span>
+          </li>
+          <li>
+            <span>在业</span>
+          </li>
+          <li>
+            <span>存续</span>
+          </li>
+          <li>
+            <span>吊销</span>
+          </li>
+          <li>
+            <span class="active">注销</span>
+          </li>
+          <li>
+            <span>迁出</span>
+          </li>
         </ul>
       </div>
       <div class="pull" @click=toggleFilter>
@@ -92,7 +135,7 @@
       <div class="list">
         <ul class="clearfix">
           <li v-for="(item,index) in dataList" :key="index">
-            <router-link to="/companydetails" class="clearfix">
+            <router-link to="/basicinfotable" class="clearfix">
               <div class="logo">
                 <img :src=item.imgSrc>
               </div>
@@ -123,7 +166,7 @@
         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage3" :page-size="100" layout="prev, pager, next, jumper" :total="1000">
         </el-pagination>
       </div> -->
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="10" background layout="prev, pager, next, jumper" :total="100">
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="currentPage1" :page-size="10" background layout="prev, pager, next, jumper" :total=total>
       </el-pagination>
     </div>
 
@@ -135,8 +178,9 @@ export default {
   data() {
     return {
       filterShow: true,
+      dropdownShow: false,
       currentPage1: 1,
-      total: "",
+      total: 1,
       dataList: [],
       options: [
         {
@@ -184,10 +228,10 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-      console.log('发送第'+val+'页的请求')
+      console.log("发送第" + val + "页的请求");
     },
     getListData() {
-      let url = "../../static/lists.json";
+      let url = "../../static/data/lists.json";
       this.$axios.get(url).then(res => {
         console.log(res.data.indexList);
         this.dataList = res.data.indexList;
@@ -196,6 +240,9 @@ export default {
     },
     toggleFilter() {
       this.filterShow = !this.filterShow;
+    },
+    changeDropdown() {
+      this.dropdownShow = !this.dropdownShow;
     }
   }
 };
@@ -217,52 +264,58 @@ export default {
   box-sizing: border-box;
   position: relative;
   // margin-top: 100px;
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 2s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
-  }
   .filterList {
     line-height: 41px;
-    transition: all 0.5s;
     p {
       color: #999;
       float: left;
       &:nth-child(1) {
         width: 80px;
       }
-      .all {
-        display: inline-block;
-        width: 52px;
-        height: 24px;
-        background-color: #ff8a00;
-        border-radius: 3px;
-        color: #fff;
-        line-height: 24px;
-        margin: 0 10px;
-        text-align: center;
-      }
     }
-    ul {
+    > ul {
       float: left;
-      margin-left: 20px;
-      li {
+      > li {
         float: left;
-        margin-right: 40px;
-        font-size: 16px;
-        // .pulldown {
-        //   display: inline-block;
-        //   width: 16px;
-        //   height: 16px;
-        //   background: url(../../static/imgs/pulldown.png) no-repeat;
-        // }
+        // width: 52px;
+        text-align: center;
+        margin: 0 10px;
+        cursor: pointer;
+        span {
+          display: inline-block;
+          height: 24px;
+          border-radius: 3px;
+          line-height: 24px;
+          padding: 0 10px;
+          text-align: center;
+          &.active,
+          &:hover {
+            background-color: #ff8a00;
+            color: #fff;
+          }
+        }
         .el-select {
-          width: 110px;
-          .el-input {
-            .el-input__inner {
-              border: none;
+          width: 120px;
+        }
+        ul {
+          position: absolute;
+          background: #fff;
+          box-shadow: 0 0 8px rgba(153, 153, 153, 0.4);
+          z-index: 999;
+          text-align: left;
+          border-radius: 4px;
+          &::after {
+            display: block;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #333;
+          }
+          li {
+            padding: 0 20px;
+            font-size: 14px;
+            &:hover {
+              background: #f5f7fa;
             }
           }
         }
@@ -279,7 +332,8 @@ export default {
     transform: translate(-50%, 100%);
     border-top: none;
     border-radius: 0 0 3px 3px;
-    background: #fff url(../../static/imgs/scroll-up.png) no-repeat center center;
+    background: #fff url(../../static/imgs/scroll-up.png) no-repeat center
+      center;
     cursor: pointer;
   }
 }
@@ -424,6 +478,11 @@ export default {
   }
   .el-pagination {
     margin: 30px 0;
+  }
+  .el-pagination.is-background .btn-next,
+  .el-pagination.is-background .btn-prev,
+  .el-pagination.is-background .el-pager li {
+    background: #fff;
   }
 }
 </style>

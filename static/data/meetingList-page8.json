@@ -1,0 +1,19 @@
+{
+    "total": 72,
+    "meetingList": {
+        "pageIndex": 8,
+        "pageSize": "10",
+        "meeting": [
+            {
+                "meetingName": "第八页第五届董事会第三次会议",
+                "meetingDate": "2018-05-15",
+                "meetingType": "董事会"
+            },
+            {
+                "meetingName": "第五届董事会第三次会议",
+                "meetingDate": "2018-05-02",
+                "meetingType": "董事会"
+            }
+        ]
+    }
+}

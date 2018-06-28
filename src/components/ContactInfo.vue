@@ -6,15 +6,15 @@
       </div>
       <div class="content">
         <h3>
-          <span class="blue">詹纯新</span>（00089898）</h3>
+          <span class="blue">{{this.contactInfo.contactName}}</span>（{{this.contactInfo.code}}）</h3>
         <ul class="clearfix">
-          <li>430398981187871615</li>
-          <li>13878768983</li>
-          <li>0731-3432167</li>
+          <li>{{this.contactInfo.IDcard}}</li>
+          <li>{{this.contactInfo.mobile}}</li>
+          <li>{{this.contactInfo.wechat}}</li>
           <li>
-            <i></i>13878768983</li>
+            <i></i>{{this.contactInfo.phone}}</li>
         </ul>
-        <p>长沙市岳麓区中联重科麓谷工业园</p>
+        <p>{{this.contactInfo.location}}</p>
       </div>
     </div>
     <div class="main">
@@ -51,34 +51,34 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <p>法人</p>
-                  <p>（1）</p>
+              <tr v-for="(item,index) in bussinessRole" :key="index">
+                <td :rowspan="item.rolespan" :class="{hidden: item.roledis}">
+                  <p>{{item.role}}</p>
+                  <p>（{{item.num}}）</p>
                 </td>
                 <td>
-                  <p class="blue">中联重机公司</p>
+                  <p class="blue">{{item.companyName}}</p>
                 </td>
                 <td>
-                  <p>董事 2016.1.30-2018.12.30</p>
+                  <p v-for="(e,i) in item.jobInfo" :key="i">{{e}}</p>
                 </td>
                 <td>
-                  <p>任务内</p>
+                  <p>{{item.jobStatus}}</p>
                 </td>
                 <td>
-                  <p>福建</p>
+                  <p>{{item.province}}</p>
                 </td>
                 <td>
-                  <p>2017-03-01</p>
+                  <p>{{item.date}}</p>
                 </td>
                 <td>
-                  <p class="green">存续（在营、开业、在册）</p>
+                  <p class="green">{{item.operateStatus}}</p>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td rowspan="3">
                   <p>股东</p>
-                  <p>（2）</p>
+                  <p>（3）</p>
                 </td>
                 <td>
                   <p class="blue">中联重机公司</p>
@@ -183,7 +183,7 @@
                 <td>
                   <p class="green">存续（在营、开业、在册）</p>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -216,108 +216,24 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr v-for="(item,index) in companyInfo" :key="index">
                 <td>
-                  <p class="blue">中联重机公司</p>
+                  <p class="blue">{{item.companyName}}</p>
                 </td>
                 <td>
-                  <p>福建</p>
+                  <p>{{item.province}}</p>
                 </td>
                 <td>
-                  <p>2017-03-01</p>
+                  <p>{{item.date}}</p>
                 </td>
                 <td>
-                  <p class="green">存续（在营、开业、在册）</p>
+                  <p class="green">{{item.operateStatus}}</p>
                 </td>
                 <td>
-                  <p>法人，股东，董事长</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p class="blue">中联重机公司</p>
-                </td>
-                <td>
-                  <p>福建</p>
-                </td>
-                <td>
-                  <p>2017-03-01</p>
-                </td>
-                <td>
-                  <p class="green">存续（在营、开业、在册）</p>
-                </td>
-                <td>
-                  <p>法人，股东，董事长</p>
+                  <p>{{item.role}}</p>
                 </td>
               </tr>
-              <tr>
-                <td>
-                  <p class="blue">中联重机公司</p>
-                </td>
-                <td>
-                  <p>福建</p>
-                </td>
-                <td>
-                  <p>2017-03-01</p>
-                </td>
-                <td>
-                  <p class="green">存续（在营、开业、在册）</p>
-                </td>
-                <td>
-                  <p>法人，股东，董事长</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p class="blue">中联重机公司</p>
-                </td>
-                <td>
-                  <p>福建</p>
-                </td>
-                <td>
-                  <p>2017-03-01</p>
-                </td>
-                <td>
-                  <p class="green">存续（在营、开业、在册）</p>
-                </td>
-                <td>
-                  <p>法人，股东，董事长</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p class="blue">中联重机公司</p>
-                </td>
-                <td>
-                  <p>福建</p>
-                </td>
-                <td>
-                  <p>2017-03-01</p>
-                </td>
-                <td>
-                  <p class="green">存续（在营、开业、在册）</p>
-                </td>
-                <td>
-                  <p>法人，股东，董事长</p>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <p class="blue">中联重机公司</p>
-                </td>
-                <td>
-                  <p>福建</p>
-                </td>
-                <td>
-                  <p>2017-03-01</p>
-                </td>
-                <td>
-                  <p class="green">存续（在营、开业、在册）</p>
-                </td>
-                <td>
-                  <p>法人，股东，董事长</p>
-                </td>
-              </tr>
+
             </tbody>
           </table>
         </div>
@@ -329,10 +245,47 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      contactInfo: [],
+      bussinessRole: [],
+      companyInfo: []
+    };
   },
-  mounted() {},
-  methods: {}
+  mounted() {
+    this.getListInfo();
+  },
+  methods: {
+    getListInfo() {
+      let url = "../../static/data/contactInfo1.json";
+      this.$axios.get(url).then(res => {
+        console.log(res.data);
+        this.contactInfo = res.data.contactInfo;
+        this.companyInfo = res.data.companyInfo;
+        let list = res.data.bussinessRole;
+
+        //把请求到的数据进行过滤
+        for (let field in list[0]) {
+          var k = 0;
+          while (k < list.length) {
+            list[k][field + "span"] = 1;
+            list[k][field + "dis"] = false;
+            for (var i = k + 1; i <= list.length - 1; i++) {
+              if (list[k][field] == list[i][field] && list[k][field] != "") {
+                list[k][field + "span"]++;
+                list[k][field + "dis"] = false;
+                list[i][field + "span"] = 1;
+                list[i][field + "dis"] = true;
+              } else {
+                break;
+              }
+            }
+            k = i;
+          }
+        }
+        this.bussinessRole = list;
+      });
+    }
+  }
 };
 </script>
 <style lang="less">
@@ -498,6 +451,9 @@ export default {
   .green {
     color: #77ca08;
   }
+}
+.hidden {
+  display: none;
 }
 </style>
 

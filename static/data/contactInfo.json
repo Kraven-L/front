@@ -1,0 +1,124 @@
+{
+    "contactInfo": {
+        "contactName": "詹纯新",
+        "code": "00089898",
+        "IDcard": "430398981187871615",
+        "mobile": "13878768983",
+        "wechat": "0731-3432167",
+        "phone": "13878768983",
+        "location":"长沙市岳麓区中联重科麓谷工业园"
+    },
+    "bussinessRole": [
+        {
+            "role": "法人",
+            "msg": [
+                {
+                    "companyName": "中联重机公司",
+                    "jobInfo": "董事 2016.1.30-2018.12.30",
+                    "jobStatus": "任务内",
+                    "province": "福建",
+                    "date": "2017-03-01",
+                    "operateStatus": "存续（在营、开业、在册）"
+                }
+            ]
+        },
+        {
+            "role": "股东",
+            "msg": [
+                {
+                    "companyName": "中联重机公司",
+                    "jobInfo": [
+                        "董事 2016.1.30-2018.12.30"
+                    ],
+                    "jobStatus": "任期内",
+                    "province": "北京",
+                    "date": "2017-03-01",
+                    "operateStatus": "存续（在营、开业、在册）"
+                },
+                {
+                    "companyName": "心怡科技有限公司",
+                    "jobInfo": [
+                        "董事 2016.1.30-2018.12.30"
+                    ],
+                    "jobStatus": "任期内",
+                    "province": "北京",
+                    "date": "2017-03-01",
+                    "operateStatus": "存续（在营、开业、在册）"
+                },
+                {
+                    "companyName": "阿里巴巴股份有限公司",
+                    "jobInfo": [
+                        "董事 2016.1.30-2018.12.30"
+                    ],
+                    "jobStatus": "任期内",
+                    "province": "北京",
+                    "date": "2017-03-01",
+                    "operateStatus": "存续（在营、开业、在册）"
+                }
+            ]
+        },
+        {
+            "role": "董监高",
+            "msg": [
+                {
+                    "companyName": "中联重机公司",
+                    "jobInfo": [
+                        "董事 2016.1.30-2018.12.30"
+                    ],
+                    "jobStatus": "任期内",
+                    "province": "北京",
+                    "date": "2017-03-01",
+                    "operateStatus": "存续（在营、开业、在册）"
+                },
+                {
+                    "companyName": "中联重科股份有限公司",
+                    "jobInfo": [
+                        "董事 2016.1.30-2018.12.30",
+                        "总经理 2016.1.30-2018.12.30"
+                    ],
+                    "jobStatus": "过期",
+                    "province": "北京",
+                    "date": "2017-03-01",
+                    "operateStatus": "存续（在营、开业、在册）"
+                }
+            ]
+        }
+    ],
+    "companyInfo": [
+        {
+            "companyName": "中联重机公司1",
+            "province": "福建",
+            "date": "2017-03-01",
+            "operateStatus": "存续（在营、开业、在册）",
+            "role": "法人、股东、董监高"
+        },
+        {
+            "companyName": "中联重机公司2",
+            "province": "福建",
+            "date": "2017-03-01",
+            "operateStatus": "存续（在营、开业、在册）",
+            "role": "法人、股东、董监高"
+        },
+        {
+            "companyName": "中联重机公司3",
+            "province": "福建",
+            "date": "2017-03-01",
+            "operateStatus": "存续（在营、开业、在册）",
+            "role": "法人、股东、董监高"
+        },
+        {
+            "companyName": "中联重机公司4",
+            "province": "福建",
+            "date": "2017-03-01",
+            "operateStatus": "存续（在营、开业、在册）",
+            "role": "法人、股东、董监高"
+        },
+        {
+            "companyName": "中联重机公司5",
+            "province": "福建",
+            "date": "2017-03-01",
+            "operateStatus": "存续（在营、开业、在册）",
+            "role": "法人、股东、董监高"
+        }
+    ]
+}
