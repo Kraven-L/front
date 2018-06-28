@@ -10,7 +10,7 @@
           </li>
           <li>
             <!-- <span @click="changeDropdown">工程机械</span>
-            <ul v-show="dropdownShow">
+            <ul v-show="isActive">
               <li>全部</li>
               <li>混泥土</li>
               <li>混泥土改制</li>
@@ -93,7 +93,7 @@
           </li>
         </ul>
       </div>
-      <div class="pull" @click=toggleFilter>
+      <div class="pull" :class="{down:this.isActive}" @click=toggleFilter>
       </div>
     </div>
     <div class="recently">
@@ -131,11 +131,11 @@
     </div>
     <div class="list-box">
       <p>共计
-        <span>{{total}} </span>家公司</p>
+        <span>{{total}}</span>家公司</p>
       <div class="list">
         <ul class="clearfix">
           <li v-for="(item,index) in dataList" :key="index">
-            <router-link to="/basicinfotable" class="clearfix">
+            <router-link to="/basicinfo" class="clearfix">
               <div class="logo">
                 <img :src=item.imgSrc>
               </div>
@@ -178,7 +178,7 @@ export default {
   data() {
     return {
       filterShow: true,
-      dropdownShow: false,
+      isActive: false,
       currentPage1: 1,
       total: 1,
       dataList: [],
@@ -240,9 +240,7 @@ export default {
     },
     toggleFilter() {
       this.filterShow = !this.filterShow;
-    },
-    changeDropdown() {
-      this.dropdownShow = !this.dropdownShow;
+      this.isActive = !this.isActive;
     }
   }
 };
@@ -253,6 +251,7 @@ export default {
 @borderColor: #e1e1e1;
 
 .main {
+
 }
 .filter {
   float: left;
@@ -288,8 +287,7 @@ export default {
           line-height: 24px;
           padding: 0 10px;
           text-align: center;
-          &.active,
-          &:hover {
+          &.active{
             background-color: #ff8a00;
             color: #fff;
           }
@@ -335,6 +333,10 @@ export default {
     background: #fff url(../../static/imgs/scroll-up.png) no-repeat center
       center;
     cursor: pointer;
+    &.down {
+      background: #fff url(../../static/imgs/scroll-down.png) no-repeat center
+        center;
+    }
   }
 }
 .recently {

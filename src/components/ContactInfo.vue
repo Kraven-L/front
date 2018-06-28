@@ -288,7 +288,7 @@ export default {
   }
 };
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @borderColor: #e1e1e1;
 @tableBorderColor: #ceeca6;
 
