@@ -1,7 +1,37 @@
 <template>
   <div class="main clearfix">
     <div class="filter">
-      <div class="filterList clearfix">
+      <div class="filterList clearfix" v-for="(item,index) in filterList" :key="index" v-show="filterShow">
+        <p>{{item.title}}</p>
+        <p style="color:#333">|</p>
+        <ul>
+          <li v-for="(e,i) in item.lists" :key="i" @click="addClass(i)" :class="{active:i==actived}">
+            <span>{{e}}</span>
+          </li>
+          <!-- <li>
+            <span>工程机械</span>
+          </li>
+          <li>
+            <span class="active">配套件</span>
+          </li>
+          <li>
+            <span>海外</span>
+          </li>
+          <li>
+            <span>金融</span>
+          </li>
+          <li>
+            <span>农机</span>
+          </li>
+          <li>
+            <span>环境</span>
+          </li>
+          <li>
+            <span>其他</span>
+          </li> -->
+        </ul>
+      </div>
+      <!-- <div class="filterList clearfix">
         <p>板块</p>
         <p style="color:#333">|</p>
         <ul>
@@ -9,17 +39,6 @@
             <span>全部</span>
           </li>
           <li>
-            <!-- <span @click="changeDropdown">工程机械</span>
-            <ul v-show="isActive">
-              <li>全部</li>
-              <li>混泥土</li>
-              <li>混泥土改制</li>
-              <li>桩工</li>
-              <li>建起</li>
-              <li>工起</li>
-              <li>非开挖</li>
-              <li>土方</li>
-            </ul> -->
             <el-select v-model="value" placeholder="全部分类">
               <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
               </el-option>
@@ -92,7 +111,7 @@
             <span>迁出</span>
           </li>
         </ul>
-      </div>
+      </div> -->
       <div class="pull" :class="{down:this.isActive}" @click=toggleFilter>
       </div>
     </div>
@@ -131,7 +150,7 @@
     </div>
     <div class="list-box">
       <p>共计
-        <span>{{total}}</span>家公司</p>
+        <span>{{total}}</span> 家公司</p>
       <div class="list">
         <ul class="clearfix">
           <li v-for="(item,index) in dataList" :key="index">
@@ -182,6 +201,7 @@ export default {
       currentPage1: 1,
       total: 1,
       dataList: [],
+      filterList: [],
       options: [
         {
           value: "选项1",
@@ -216,11 +236,13 @@ export default {
           label: "土方"
         }
       ],
-      value: "工程机械"
+      value: "工程机械",
+      actived: 0
     };
   },
   mounted() {
     this.getListData();
+    this.getFilterList();
   },
   methods: {
     handleSizeChange(val) {
@@ -233,7 +255,7 @@ export default {
     getListData() {
       let url = "../../static/data/lists.json";
       this.$axios.get(url).then(res => {
-        console.log(res.data.indexList);
+        // console.log(res.data.indexList);
         this.dataList = res.data.indexList;
         this.total = res.data.total;
       });
@@ -241,6 +263,18 @@ export default {
     toggleFilter() {
       this.filterShow = !this.filterShow;
       this.isActive = !this.isActive;
+    },
+    getFilterList() {
+      let url = "../../static/data/filterList.json";
+      this.$axios.get(url).then(res => {
+        // console.log(res);
+        this.filterList = res.data.filterLists;
+        // console.log(this.filterList);
+      });
+    },
+    addClass(index) {
+      // this.actived = index;
+      console.log(index);
     }
   }
 };
@@ -251,7 +285,6 @@ export default {
 @borderColor: #e1e1e1;
 
 .main {
-
 }
 .filter {
   float: left;
@@ -287,7 +320,7 @@ export default {
           line-height: 24px;
           padding: 0 10px;
           text-align: center;
-          &.active{
+          &.active {
             background-color: #ff8a00;
             color: #fff;
           }

@@ -1,7 +1,32 @@
 <template>
   <div class="basicInfo">
     <div class="companyInfo">
-
+      <div class="logo">
+        <img src="../../static/imgs/logo.png">
+      </div>
+      <ul class="content">
+        <li>
+          <h3>中联重机公司</h3>
+        </li>
+        <li>
+          <span class="green">
+            <p>存续（在营、开业、在册）</p>
+          </span>
+        </li>
+        <li>
+          <!-- <span class="orange">
+            <p>曾用名</p>
+          </span> -->
+          <el-tooltip class="item" effect="dark" content="奇瑞重工科技股份有限公司" placement="bottom-start">
+            <!-- <el-button>下边</el-button> -->
+            <span class="orange">
+              <p>曾用名</p>
+            </span>
+          </el-tooltip>
+        </li>
+      </ul>
+      <p>更新时间：2018-05-15</p>
+      <el-button type="primary" icon="el-icon-printer" class="button">打印</el-button>
     </div>
     <div class="main">
       <div class="top">
@@ -433,8 +458,67 @@ export default {
   .companyInfo {
     height: 138px;
     border: 1px solid @borderColor;
-    background: #fff;
+    background: #fff url(../../static/imgs/name_bg.png) no-repeat;
     margin-bottom: 10px;
+    position: relative;
+    .logo {
+      float: left;
+      margin: 19px 19px 0 19px;
+    }
+    .content {
+      float: left;
+      margin-top: 55px;
+      li {
+        float: left;
+        line-height: 25px;
+        margin-right: 20px;
+        h3 {
+          font-size: 20px;
+          color: #333;
+          line-height: 25px;
+          font-weight: bold;
+        }
+        span {
+          border: 1px solid #77ca08;
+          border-radius: 4px;
+          display: inline-block;
+          height: 18px;
+          &.green {
+            border-color: #77ca08;
+            color: #77ca08;
+          }
+          &.orange {
+            border-color: #ff8a00;
+            color: #ff8a00;
+          }
+          &.red {
+            border-color: #ff0000;
+            color: #ff0000;
+          }
+          p {
+            line-height: 18px;
+            font-size: 14px;
+            margin: 0 10px;
+          }
+        }
+      }
+    }
+    > p {
+      color: #999;
+      font-size: 14px;
+      line-height: 30px;
+      float: right;
+      margin-right: 5px;
+      background: #fff;
+      padding: 0 5px;
+      border-radius: 5px;
+    }
+    .button {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
   }
   .main {
     border: 1px solid @borderColor;
